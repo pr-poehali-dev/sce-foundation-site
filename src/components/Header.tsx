@@ -1,4 +1,3 @@
-import { Link } from "react-router-dom";
 import { 
   NavigationMenu, 
   NavigationMenuContent, 
@@ -10,6 +9,7 @@ import {
 } from "@/components/ui/navigation-menu";
 import { cn } from "@/lib/utils";
 import { Lock, ShieldAlert, FileText } from "lucide-react";
+import { Link } from "react-router-dom";
 
 const Header = () => {
   return (
@@ -26,19 +26,23 @@ const Header = () => {
         <NavigationMenu>
           <NavigationMenuList>
             <NavigationMenuItem>
-              <Link to="/">
-                <NavigationMenuLink className={navigationMenuTriggerStyle()}>
-                  Главная
-                </NavigationMenuLink>
-              </Link>
+              {/* Используем NavigationMenuLink с обработчиком вместо вложенного Link */}
+              <NavigationMenuLink 
+                className={navigationMenuTriggerStyle()}
+                onClick={() => window.location.href = '/'}
+              >
+                Главная
+              </NavigationMenuLink>
             </NavigationMenuItem>
             
             <NavigationMenuItem>
-              <Link to="/objects">
-                <NavigationMenuLink className={navigationMenuTriggerStyle()}>
-                  Объекты SCE
-                </NavigationMenuLink>
-              </Link>
+              {/* Используем NavigationMenuLink с обработчиком вместо вложенного Link */}
+              <NavigationMenuLink 
+                className={navigationMenuTriggerStyle()}
+                onClick={() => window.location.href = '/objects'}
+              >
+                Объекты SCE
+              </NavigationMenuLink>
             </NavigationMenuItem>
             
             <NavigationMenuItem>
@@ -46,22 +50,22 @@ const Header = () => {
               <NavigationMenuContent>
                 <ul className="grid w-[400px] gap-3 p-4">
                   <li className="row-span-3">
-                    <Link to="/about">
-                      <NavigationMenuLink
-                        className={cn(
-                          "flex h-full w-full select-none flex-col justify-end rounded-md bg-gradient-to-b from-muted/50 to-muted p-6 no-underline outline-none focus:shadow-md"
-                        )}
-                      >
-                        <div className="mb-2 mt-4 text-lg font-medium">
-                          О SCE Foundation
-                        </div>
-                        <p className="text-sm leading-tight text-muted-foreground">
-                          История, структура и цели фонда
-                        </p>
-                      </NavigationMenuLink>
-                    </Link>
+                    {/* Используем обычный a вместо Link */}
+                    <NavigationMenuLink
+                      className={cn(
+                        "flex h-full w-full select-none flex-col justify-end rounded-md bg-gradient-to-b from-muted/50 to-muted p-6 no-underline outline-none focus:shadow-md"
+                      )}
+                      onClick={() => window.location.href = '/about'}
+                    >
+                      <div className="mb-2 mt-4 text-lg font-medium">
+                        О SCE Foundation
+                      </div>
+                      <p className="text-sm leading-tight text-muted-foreground">
+                        История, структура и цели фонда
+                      </p>
+                    </NavigationMenuLink>
                   </li>
-                  <ListItem to="/docs" title="Документы" icon={<FileText className="h-4 w-4 mr-2" />}>
+                  <ListItem href="/docs" title="Документы" icon={<FileText className="h-4 w-4 mr-2" />}>
                     Протоколы и руководства фонда
                   </ListItem>
                 </ul>
@@ -69,11 +73,13 @@ const Header = () => {
             </NavigationMenuItem>
             
             <NavigationMenuItem>
-              <Link to="/news">
-                <NavigationMenuLink className={navigationMenuTriggerStyle()}>
-                  Новости
-                </NavigationMenuLink>
-              </Link>
+              {/* Используем NavigationMenuLink с обработчиком вместо вложенного Link */}
+              <NavigationMenuLink 
+                className={navigationMenuTriggerStyle()}
+                onClick={() => window.location.href = '/news'}
+              >
+                Новости
+              </NavigationMenuLink>
             </NavigationMenuItem>
           </NavigationMenuList>
         </NavigationMenu>
@@ -90,32 +96,32 @@ const Header = () => {
 };
 
 interface ListItemProps {
-  to: string;
+  href: string;
   title: string;
   children: React.ReactNode;
   icon?: React.ReactNode;
 }
 
-const ListItem = ({ to, title, children, icon }: ListItemProps) => {
+const ListItem = ({ href, title, children, icon }: ListItemProps) => {
   return (
     <li>
-      <Link to={to}>
-        <NavigationMenuLink asChild>
-          <a
-            className={cn(
-              "block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground"
-            )}
-          >
-            <div className="flex items-center text-sm font-medium leading-none">
-              {icon && icon}
-              {title}
-            </div>
-            <p className="line-clamp-2 text-sm leading-snug text-muted-foreground">
-              {children}
-            </p>
-          </a>
-        </NavigationMenuLink>
-      </Link>
+      {/* Используем NavigationMenuLink с обработчиком вместо вложенного Link */}
+      <NavigationMenuLink asChild>
+        <a
+          href={href}
+          className={cn(
+            "block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground"
+          )}
+        >
+          <div className="flex items-center text-sm font-medium leading-none">
+            {icon && icon}
+            {title}
+          </div>
+          <p className="line-clamp-2 text-sm leading-snug text-muted-foreground">
+            {children}
+          </p>
+        </a>
+      </NavigationMenuLink>
     </li>
   );
 };
