@@ -2,7 +2,7 @@ import { Badge } from "@/components/ui/badge";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
 import { Link } from "react-router-dom";
-import { ArrowRight, FileText, AlertCircle, Flask } from "lucide-react";
+import { ArrowRight, FileText, AlertCircle, Beaker } from "lucide-react";
 
 // Типы для новостей
 type PostType = 'news' | 'announcement' | 'research';
@@ -48,7 +48,7 @@ const recentNews: NewsItem[] = [
 const newsTypeIcons = {
   news: <FileText className="h-4 w-4" />,
   announcement: <AlertCircle className="h-4 w-4" />,
-  research: <Flask className="h-4 w-4" />
+  research: <Beaker className="h-4 w-4" />
 };
 
 // Цвета для типов новостей
